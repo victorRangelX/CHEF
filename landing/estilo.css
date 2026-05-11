@@ -1,14 +1,26 @@
 :root {
             --duracion: 25s; /* Tiempo total del ciclo (5s por slide) */
+
+            --color-principal: #FFD54F;
+            --color-secundario: #FFFAD3;
+            --color-fondo: #FFFFFF;
+            --color-texto: #474747;
         }
+            
+
+
+
+
             /*elementos de la tablas generales */
         body, html {
+            scroll-behavior: smooth;
             margin: 0;
             padding: 0;
             height: 2000px;
+            font-family: 'Montserrat', sans-serif;
             overflow: relative;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: rgb(37, 37, 37);
+     
+            background-color:var(--color-fondo);
         }
 
         /*Baner*/
@@ -26,7 +38,7 @@
         /* navegacion  */
     
         .barnav{
-            background-color: black;
+            background-color:var(--color-fondo);
             position: relative;
             width: 100%;
             height: 10vh;
@@ -36,28 +48,47 @@
         }
 
             .item{
-            background-color: rgb(143, 143, 143);
+            background-color:var(--color-principal);
             position:static;
             width: 15%;
-            height: 5vh;
+            height:3vh;
             padding: 1vh;
+      
              margin: 2vh;
            
         }
 
                .itemBoton{
-            background-color: rgb(233, 93, 93);
+            background-color:var(--color-principal);
             position:static;
             width: 15%;
-            height: 5vh;
+            border-radius: 30px;
+            height: 3vh;
             padding: 1vh;
              margin: 2vh;
            
         }
 
+        a{
+            position:static;
+            width: 15%;
+            height:3vh;
+            padding: 1vh;
+             margin: 2vh;
+             margin-top: 2%;
+             font-size: 5vh;
+
+        text-decoration: none;     
+             color:var(--color-texto) ;              
+        display: inline--block;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: none;
+        }
+
 
            .itemLogo{
-            background-color: rgb(88, 143, 243);
+
             position:static;
             width: 15%;
             height: 5vh;
@@ -79,72 +110,90 @@
 
         /* Deslizador principal */
         .deslizador {
-            display: flex;
-            width: 500%; /* 5 elementos = 500% */
-            height: 100%;
-            animation: deslizar var(--duracion) infinite ease-in-out;
-        }
+    display: flex;
+    width: 500%; /* 5 slides = 500% */
+    height: 100%;
+    animation: deslizar var(--duracion) infinite ease-in-out;
+}
 
         /* Estilo de cada diapositiva */
         .slide {
-            position: relative;
-            width: 20%;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
+    position: relative;
+    width: 20%; /* Cada slide ocupa 1/5 del total */
+    height: 100%;
+    overflow: hidden; /* CRUCIAL: Corta el exceso del 120% del fondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
 
         /* Fondo con efecto Parallax */
         .fondo-parallax {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 120%; /* Más ancho para permitir el movimiento */
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            animation: parallax-mov var(--duracion) infinite ease-in-out;
-        }
-
+    position: absolute;
+    top: 0;
+    /* AJUSTE: Movemos la imagen un poco a la izquierda para centrar el 120% */
+    left: -10%; 
+    width: 120%; 
+    height: 100%;
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+    
+    /* Optimización de rendimiento */
+    backface-visibility: hidden;
+    will-change: transform; /* Avisa al navegador que esto se moverá */
+    
+    animation: parallax-mov var(--duracion) infinite ease-in-out;
+}
         /* Contenido del slide */
-        .contenido {
-            background: rgba(0, 0, 0, 0.151);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
+       .contenido {
+    z-index: 10;
+   color: #1d1d1d;
+    text-shadow: 0 10px 20px rgba(0, 0, 5, 0.665);
+    /* Evita que el texto toque los bordes en móvil */
+    padding: 0 20px;
+}
+
+      .contenido h1{
+        font-size: 35px;
+}
+
+      .contenido p{
+        font-size: 25px;
+}
 
         /* Animación del movimiento del carrusel */
-        @keyframes deslizar {
-            0%, 15% { transform: translateX(0%); }
-            20%, 35% { transform: translateX(-20%); }
-            40%, 55% { transform: translateX(-40%); }
-            60%, 75% { transform: translateX(-60%); }
-            80%, 95% { transform: translateX(-80%); }
-            100% { transform: translateX(0%); }
-        }
+       @keyframes deslizar {
+    0%, 15%   { transform: translateX(0%); }
+    20%, 35%  { transform: translateX(-20%); }
+    40%, 55%  { transform: translateX(-40%); }
+    60%, 75%  { transform: translateX(-60%); }
+    80%, 95%  { transform: translateX(-80%); }
+    100%      { transform: translateX(0%); }
+}
 
         /* Animación Parallax (el fondo se mueve en sentido contrario o diferente ritmo) */
-        @keyframes parallax-mov {
-            0%, 15% { transform: translateX(0); }
-            20%, 35% { transform: translateX(-5%); }
-            40%, 55% { transform: translateX(-10%); }
-            60%, 75% { transform: translateX(-15%); }
-            80%, 95% { transform: translateX(-20%); }
-            100% { transform: translateX(0); }
-        }
+      @keyframes parallax-mov {
+    /* Usamos scale(1.1) para que la imagen crezca un 10% 
+       y tengamos "margen" para moverla sin que se estire */
+    0%, 15%   { transform: scale(1.1) translateX(0); }
+    20%, 35%  { transform: scale(1.1) translateX(-2%); }
+    40%, 55%  { transform: scale(1.1) translateX(-4%); }
+    60%, 75%  { transform: scale(1.1) translateX(-6%); }
+    80%, 95%  { transform: scale(1.1) translateX(-8%); }
+    100%      { transform: scale(1.1) translateX(0); }
+}
         /*seccion 01 */
 
         .Doble{
-          background-color: rgb(147, 165, 172);
-            position: absolute;
+          background-color:var(--color-fondo);
+            position: relative;
             width: 100%;
-            height: 60vh;
+            height: 50vh;
             display: flex;
         
             overflow: hidden;
@@ -152,7 +201,7 @@
 
 
           .bot{
-          background-color: rgb(182, 182, 182);
+          background-color:var(--color-fondo);
             position: absolute;
             width: 100%;
             height: 30vh;
@@ -160,34 +209,139 @@
             overflow: hidden;
         }
 
+ 
+
         .derecha{
+            flex-direction: column;
             position: relative;
+            font-family: 'Roboto', sans-serif;
             width: 50%;
+          
             height: 60%;
             margin-top: 10vh;
-            background-color: rgb(214, 214, 214);
+             justify-content: center; 
+           align-items: center;    
+             display: flex;
+            
         }
+
+        .derecha h1{
+             font-family: 'Roboto', sans-serif;
+        font-size: 80px;
+        color:#FFD54F;
+        margin-bottom: 0px;
+        }
+
+        .derecha p{
+        font-family: 'Roboto', sans-serif;
+        font-size: 45px;
+        padding-left: 15%;
+      
+        }
+
+         .contenido a{
+            color:#FFD54F;
+      
+        }
+
+
+     
+
+.derecha img {
+    max-width: 100%;  /* La imagen nunca será más ancha que el div .derecha */
+    height: auto;     /* Mantiene la proporción original (no se estira feo) */
+    display: block;   /* Elimina un pequeño espacio en blanco que queda abajo */
+}
+
 
         .izquierda {
             position: relative;
+              display: flex;
+            flex-direction: column;
+             justify-content: center; /* centra vertical */
+            align-items:start;     
             width: 50%;
             height: 60%;
             margin-top: 10vh;
-            background-color: rgb(250, 209, 214);
+        
+        }
+        .izquierda h2 {
+        margin-bottom: 10px;
+        font-size: 70px;
+        color: var(--color-texto);
+        font-family: 'Archivo Black', sans-serif;
+        
         }
 
+        .izquierda p{
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        font-display: auto;
+        color: var(--color-texto);
+        }
+.izquierda img {
+    max-width: 100%;  /* La imagen nunca será más ancha que el div .derecha */
+    height: auto;     /* Mantiene la proporción original (no se estira feo) */
+    display: block;   /* Elimina un pequeño espacio en blanco que queda abajo */
+}
+
+        .izquierda button p {
+        font-size: 18px;
+       
+        color:var(--color-fondo);
+        }
+
+        .izquierda button {
+            padding: 0px 20px;
+            border: none;
+            border-radius: 25px; 
+            background-color: var(--color-principal);
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .izquierda button:hover {
+        background-color: #ffc609;
+        }
+
+/*Contactooo" */
+        .datos-contacto h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.datos-contacto p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.datos-contacto strong {
+    color: #000; 
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--color-secundario);
+    margin: 20px 0;
+}
+
+
+.bot {
+    background-color: #ffc609;
+}
 
 
 
 
-
-
-
-
-
-        /* Colores de prueba para los fondos */
-        .s1 .fondo-parallax { background-image: url('https://picsum.photos/id/10/1600/900'); }
-        .s2 .fondo-parallax { background-image: url('https://picsum.photos/id/20/1600/900'); }
-        .s3 .fondo-parallax { background-image: url('https://picsum.photos/id/30/1600/900'); }
-        .s4 .fondo-parallax { background-image: url('https://picsum.photos/id/40/1600/900'); }
-        .s5 .fondo-parallax { background-image: url('https://picsum.photos/id/50/1600/900'); }
+            /* Colores de prueba para los fondos */
+            .s1 .fondo-parallax { background-image: url('../img/C1\ \(5\).png'); }
+            .s2 .fondo-parallax { background-image: url('../img/C1\ \(4\).png'); }
+            .s3 .fondo-parallax { background-image: url('../img/C1\ \(3\).png'); }
+            .s4 .fondo-parallax { background-image: url('../img/C1\ \(2\).png'); }
+            .s5 .fondo-parallax { background-image: url('../img/C1\ \(1\).png'); }

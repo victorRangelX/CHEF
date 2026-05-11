@@ -1,6 +1,4 @@
 import express from "express";
-import cors from "cors";
-app.use(cors());
 
 const app = express();
 app.use(express.json());
@@ -23,7 +21,7 @@ app.post("/preguntar", async (req, res) => {
         messages: [
   {
     role: "system",
-    content: "Eres un chef experto. Responde siempre con recetas claras, con ingredientes y pasos, debes priorisar dar recetas que sean claras con pasos claros de seguir y con el objetivo de enseñar a cocinar, podrias dar lar recetas en 3 pasos, ingredientes, instruciones de elvaoracion , y explicar el nivel de difucltad, asi como tips de comoo prerararlo,"
+    content: "Eres un chef experto. Responde siempre con recetas claras, con ingredientes y pasos, debes priorisar dar recetas que sean claras con pasos claros de seguir y con el objetivo de enseñar a cocinar, podrias dar lar recetas en 3 pasos, ingredientes, instruciones de elvaoracion , y explicar el nivel de difucltad, asi como tips de q"
   },
   {
     role: "user",
@@ -50,4 +48,3 @@ app.post("/preguntar", async (req, res) => {
 app.listen(3000, () => {
   console.log("http://localhost:3000");
 }); 
-
