@@ -1,0 +1,5 @@
+https://github.com/victorRangelX/ChefPrueba/blob/main/server.js
+
+github donde se llama la api_key, del agente IA, que carga la aplicacion json, para generar respuestas
+inteligentes, este elemento esta corriendo en un servidor externo de Render, para poder llamarlo desde
+awarespace, sin saturar la pagina 
